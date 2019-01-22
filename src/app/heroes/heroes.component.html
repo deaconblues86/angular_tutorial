@@ -1,0 +1,25 @@
+<!-- This html file forms the app-heros html object (tag) which can be referenced in the app.component htnml -->
+<!-- | uppercase activates the UppercasePipe - this and others reformats display data -->
+<h2>My Heroes</h2>
+<ul class="heroes">
+    <!-- *ngFor = repeater - it repeats host element (li) for each thing (hero) in the list (heroes) -->
+    <!-- (click) = listens for li's click event.  onSelect(hero), a HeroesComponent method, executes on said event -->
+    <!-- class.selected pulls out the li.selected styling from the css when the hero object matches the components selectedHero attribute -->
+    <li *ngFor="let hero of heroes" (click)="onSelect(hero)" [class.selected]="hero === selectedHero">
+        <span class="badge">{{hero.id}}:</span> {{hero.name}}
+    </li>
+</ul>
+
+<!-- Since selectedHero is undefined at the start, don't want (as designed) to do this junk/can't do this junk w/ no selectedHero.name or selectedHero.id -->
+<div *ngIf="selectedHero">
+    <h2>{{selectedHero.name | uppercase}} Details</h2> 
+    <div><span>id: </span>{{selectedHero.id}}</div>
+    <div><span>name: </span>{{selectedHero.name}}</div>
+    <div>
+        <label>
+            name:
+            <!-- ngModel kwarg binds data to class both ways -->
+            <input [(ngModel)]="selectedHero.name" placeholder="name">>
+        </label>
+    </div>
+</div>
